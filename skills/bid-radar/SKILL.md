@@ -1,54 +1,29 @@
 ---
 name: bid-radar
-description: Scan and rank public procurement opportunities, or evaluate a single RFP or SAM.gov notice, and return Bid, Review, or No-Bid with reasons, risks, matched capabilities, and next steps. Use when the user wants discovery, qualification, or bid/no-bid guidance against company capabilities or past work.
+description: Discover and qualify public-sector procurement opportunities for a consulting or services firm from SAM.gov scans, public notice URLs, local files, or pasted text, then return a Bid, Review, or No-Bid recommendation with score, reasons, risks, matched capabilities, evidence source, and next action. Use when the user asks to search for opportunities, shortlist notices, evaluate an RFP, compare an opportunity to company capabilities or past performance, or make a bid/no-bid decision.
 ---
 
 # BidRadar
 
-Use this skill when the user wants to discover, scan, shortlist, or qualify public opportunities for a consulting or services firm.
-
-Typical trigger requests:
-
-- "Should we bid on this RFP?"
-- "Evaluate this SAM.gov opportunity for our firm."
-- "Compare this procurement notice to our company capabilities."
-- "Review this opportunity and tell me if we should bid."
-- "Scan SAM.gov for opportunities we should bid on."
-- "Find public-sector data modernization opportunities and rank them."
-
 ## Inputs
 
-Preferred inputs:
-
-- a SAM.gov scan request with keywords or filters
-- a public opportunity URL
-- a local file with pasted opportunity text
-- pasted opportunity text written to a temp file if needed
-
-Optional input:
-
-- a company profile file
-
-If no company profile is provided, use `assets/demo-company-profile.md`.
-If no opportunity is provided, use `assets/demo-opportunity.md`.
+- Accept exactly one primary opportunity source: `--scan-sam`, `--url`, `--file`, or `--text`.
+- Accept `--company-profile` when the user provides company-specific materials.
+- Prefer `--text` for pasted content instead of creating a temporary file unless a file is explicitly needed.
+- Resolve relative file paths from the workspace root; accept absolute paths as-is.
+- Fall back to `assets/demo-company-profile.md`, `assets/demo-opportunity.md`, or `assets/demo-sam-opportunities.json` only when user input or live integrations are missing.
 
 ## Workflow
 
-1. Run `scripts/validate_inputs.py` to detect the execution mode.
-2. If the user wants discovery, run `scripts/qualify_opportunity.py --scan-sam ...` with the desired filters.
-3. Otherwise, run `scripts/qualify_opportunity.py` with the resolved input.
-4. Read the generated report.
-5. Return a concise answer with:
-   - verdict
-   - score
-   - top reasons
-   - top risks
-   - next action
-   - shortlist summary when scan mode is used
-6. Tell the user whether the run used:
-   - Apify live extraction
-   - Contextual company evidence
-   - local fallback assets
+1. Run `scripts/validate_inputs.py` first when input resolution, live integration availability, or fallback behavior is unclear.
+2. Read the preflight JSON for source resolution, integration availability, resolved files, warnings, and errors.
+3. Run `scripts/qualify_opportunity.py` as the primary execution step.
+4. Use `--scan-sam` for discovery and shortlisting requests. Pass filters such as `--keywords`, `--states`, `--naics-codes`, `--set-aside-types`, `--posted-within-days`, `--max-opportunities`, and `--opportunity-index` when needed.
+5. Use `--url`, `--file`, or `--text` for single-opportunity qualification.
+6. Pass `--company-profile` when the user gives firm-specific materials. Otherwise let the script use the demo profile.
+7. Read the JSON summary printed to stdout. Open the generated Markdown or JSON report only when you need the full evidence trail.
+8. Return a concise answer with the verdict, score, top reasons, top risks, next action, and scan shortlist summary when scan mode was used.
+9. State whether the run ended in `live`, `partial`, or `fallback` mode, and mention whether Apify, direct fetch, Contextual, or demo/local assets were used.
 
 ## Commands
 
@@ -66,6 +41,12 @@ python3 skills/bid-radar/scripts/validate_inputs.py --scan-sam --keywords "data 
 python3 skills/bid-radar/scripts/qualify_opportunity.py --scan-sam --keywords "data modernization" --states CA --max-opportunities 10
 ```
 
+For pasted text:
+
+```bash
+python3 skills/bid-radar/scripts/qualify_opportunity.py --text "Opportunity text goes here"
+```
+
 For local input:
 
 ```bash
@@ -78,34 +59,23 @@ For an explicit company profile:
 python3 skills/bid-radar/scripts/qualify_opportunity.py --file /path/to/opportunity.md --company-profile /path/to/company-profile.md
 ```
 
-## Decision Rules
+To send reports to a temporary directory:
 
-- Keep the output grounded in the opportunity text and company materials.
-- Prefer deterministic scoring over freeform judgment.
-- Use `references/scoring-rubric.md` for the score and thresholds.
-- Use `references/source-routing.md` for when to use the SAM scraper, direct fetch, or local fallback.
-- If a mandatory requirement is clearly unmet, do not override that risk with optimistic language.
-- If live integrations fail, continue in fallback mode instead of stopping.
+```bash
+python3 skills/bid-radar/scripts/qualify_opportunity.py --file /path/to/opportunity.md --report-dir /tmp/bid-radar-reports
+```
 
-## Output Expectations
+## References
 
-The report should always include:
+- Read `references/scoring-rubric.md` when you need the scoring weights, thresholds, or expected report schema.
+- Read `references/source-routing.md` when you need to reason about source selection, live integrations, or fallback order.
+- Keep reference loading selective. Do not pull reference files into context unless the current task needs them.
 
-- `Bid / Review / No-Bid`
-- total score
-- matched capabilities
-- top reasons
-- top risks
-- evidence source
-- next action
-- shortlist results in scan mode
+## Response Rules
 
-## Fallback Behavior
-
-If Apify or Contextual is unavailable:
-
-- use local opportunity content
-- use local company profile content
-- still produce a complete report
-
-The skill should fail soft, not fail closed.
+- Keep the recommendation grounded in the opportunity text and company evidence returned by the script.
+- Prefer the script's deterministic score and verdict over freeform judgment.
+- Treat missing mandatory requirements, no-go criteria, or attachment-only requirements as real risks. Do not override them with optimistic language.
+- Report the evidence source clearly: live fetch, SAM scan, Contextual, local company profile, or demo asset.
+- Surface shortlist results in scan mode instead of discussing only the selected opportunity.
+- Continue in fallback mode when Apify or Contextual is unavailable. Fail soft and still return a complete answer.
