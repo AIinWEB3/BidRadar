@@ -74,7 +74,7 @@ python3 skills/bid-radar/scripts/qualify_opportunity.py --file /path/to/opportun
 ## Response Rules
 
 - Keep the recommendation grounded in the opportunity text and company evidence returned by the script.
-- Prefer the script's deterministic score and verdict over freeform judgment.
+- Prefer the script's computed score and verdict over freeform judgment. When Contextual is configured, that score may include conservative semantic boosts from the grounded company assessment.
 - Treat missing mandatory requirements, no-go criteria, or attachment-only requirements as real risks. Do not override them with optimistic language.
 - Report the evidence source clearly: live fetch, SAM scan, Contextual, local company profile, or demo asset.
 - Surface shortlist results in scan mode instead of discussing only the selected opportunity.

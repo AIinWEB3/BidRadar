@@ -6,20 +6,23 @@ Core capabilities:
 - scan SAM.gov-style opportunities with filters such as keywords, state, and result count
 - rank and shortlist candidate opportunities before deep qualification
 - qualify a single URL, file, or pasted notice against a company profile
-- return a deterministic `Bid`, `Review`, or `No-Bid` decision with reasons, risks, matched capabilities, missing requirements, and next action
+- return a `Bid`, `Review`, or `No-Bid` decision with reasons, risks, matched capabilities, missing requirements, and next action
+- blend deterministic scoring with Contextual-backed semantic fit assessment when Contextual is configured
 
-## Demo page
+## Demo Frontend
 
-A static walkthrough site is available at `demo/index.html`.
+This repo now includes a minimal JS demo app that runs the real Python skill and renders the generated report JSON in the browser.
 
-It shows:
-
-- which tech is used at each step
-- what the workflow returns at each step
-- sample BidRadar outputs for fallback, shortlist, and deep-dive runs
-
-To view it locally, either open `demo/index.html` directly in a browser or serve the repo root with:
+Run it from the repo root:
 
 ```bash
-python3 -m http.server
+npm start
 ```
+
+Then open `http://127.0.0.1:3000`.
+
+Notes:
+
+- the server auto-loads `.env.bidradar.sh` if that file exists
+- no frontend dependencies are required; the app uses Node built-ins plus plain browser JavaScript
+- the UI exposes two live workflows: single-opportunity qualification and SAM scan
