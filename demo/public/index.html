@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BidRadar Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-inner panel">
+          <p class="eyebrow">BidRadar · skill demo</p>
+          <div class="hero-copy">
+            <div class="hero-title-block">
+              <h1>Scan SAM, score every row, rank the field.</h1>
+              <p class="lede">
+                One pipeline: company context, filters, full qualification per notice, reports on disk, leaderboard by
+                score.
+              </p>
+            </div>
+            <div class="hero-status" id="status-summary">
+              <span class="status-chip muted">Loading runtime status</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <nav class="flow-steps panel" aria-label="Workflow">
+        <ol class="flow-steps-list">
+          <li><span class="flow-num" aria-hidden="true">1</span> Company</li>
+          <li><span class="flow-line" aria-hidden="true"></span></li>
+          <li><span class="flow-num" aria-hidden="true">2</span> Scan</li>
+          <li><span class="flow-line" aria-hidden="true"></span></li>
+          <li><span class="flow-num" aria-hidden="true">3</span> Evaluate</li>
+          <li><span class="flow-line" aria-hidden="true"></span></li>
+          <li><span class="flow-num" aria-hidden="true">4</span> Reports</li>
+          <li><span class="flow-line" aria-hidden="true"></span></li>
+          <li><span class="flow-num" aria-hidden="true">5</span> Rank</li>
+        </ol>
+      </nav>
+
+      <main class="layout">
+        <aside class="panel controls sidebar">
+          <div class="tabs" role="tablist" aria-label="Workflow mode">
+            <button class="tab active" id="scan-tab" type="button" data-view="scan">Scan pipeline</button>
+            <button class="tab" id="qualify-tab" type="button" data-view="qualify">Qualify one</button>
+          </div>
+
+          <form class="workflow active" id="scan-form">
+            <div class="workflow-header">
+              <div>
+                <h2>Scan &amp; evaluate</h2>
+                <p class="workflow-sub">Python skill with <code>--scan-sam</code> and <code>--evaluate-all</code>.</p>
+              </div>
+            </div>
+
+            <label class="field">
+              <span>Company name</span>
+              <input
+                id="scan-company-name"
+                name="companyName"
+                type="text"
+                placeholder="Shown on the profile card in reports"
+                autocomplete="organization"
+              />
+            </label>
+
+            <div class="callout callout-info">
+              <strong>Filters are strict.</strong> Every keyword token must appear in the notice text; state must match
+              SAM <code>stateCode</code>. Narrow filters → fewer rows.
+            </div>
+
+            <div class="field-grid">
+              <label class="field">
+                <span>Keywords</span>
+                <input
+                  id="scan-keywords"
+                  name="keywords"
+                  type="text"
+                  value=""
+                  placeholder="Optional"
+                />
+              </label>
+              <label class="field">
+                <span>States</span>
+                <input id="scan-states" name="states" type="text" value="" placeholder="CA, NY…" />
+              </label>
+            </div>
+
+            <div class="field-grid">
+              <label class="field">
+                <span>Max opportunities</span>
+                <input id="scan-max" name="maxOpportunities" type="number" min="1" max="25" value="5" />
+              </label>
+              <label class="field">
+                <span>Posted within (days)</span>
+                <input id="scan-posted-days" name="postedWithinDays" type="number" min="1" max="365" value="30" />
+              </label>
+            </div>
+
+            <div class="field-grid">
+              <label class="field">
+                <span>NAICS</span>
+                <input id="scan-naics" name="naicsCodes" type="text" placeholder="541511" />
+              </label>
+              <label class="field">
+                <span>Set-aside</span>
+                <input id="scan-setaside" name="setAsideTypes" type="text" placeholder="SBA, WOSB" />
+              </label>
+            </div>
+
+            <label class="field checkbox-field">
+              <input id="scan-evaluate-all" name="evaluateAll" type="checkbox" checked />
+              <span>Run full contextual scoring for each shortlisted notice</span>
+            </label>
+
+            <div class="advanced-scan" id="scan-single-wrap" hidden>
+              <label class="field">
+                <span>Shortlist index (single run)</span>
+                <input id="scan-index" name="opportunityIndex" type="number" min="0" max="24" value="0" />
+              </label>
+            </div>
+
+            <button class="primary-button" type="submit" id="scan-submit">Run scan</button>
+          </form>
+
+          <form class="workflow" id="qualify-form" hidden>
+            <div class="workflow-header">
+              <div>
+                <h2>Single notice</h2>
+                <p class="workflow-sub">Empty URL + text uses the bundled demo opportunity.</p>
+              </div>
+              <button class="ghost-button" type="button" id="demo-run-button">Demo</button>
+            </div>
+
+            <label class="field">
+              <span>Company name</span>
+              <input
+                id="qualify-company-name"
+                name="companyName"
+                type="text"
+                placeholder="Optional override"
+                autocomplete="organization"
+              />
+            </label>
+
+            <label class="field">
+              <span>Opportunity URL</span>
+              <input id="qualify-url" name="url" type="url" placeholder="https://sam.gov/…" />
+            </label>
+
+            <label class="field">
+              <span>Opportunity text</span>
+              <textarea
+                id="qualify-text"
+                name="text"
+                rows="8"
+                placeholder="Paste notice text (wins over URL if both set)."
+              ></textarea>
+            </label>
+
+            <button class="primary-button" type="submit">Run qualification</button>
+          </form>
+        </aside>
+
+        <div class="main-column">
+          <section class="panel recent-panel">
+            <div class="panel-header">
+              <div>
+                <h2>Recent reports</h2>
+                <p class="panel-sub">Files written under <code>reports/</code> on each run.</p>
+              </div>
+            </div>
+            <div class="recent-runs" id="recent-runs"></div>
+          </section>
+
+          <section class="panel result-shell">
+            <div class="panel-header result-panel-header">
+              <div>
+                <h2>Results</h2>
+                <p class="panel-sub" id="result-caption">Run the scan pipeline to see the leaderboard and reports.</p>
+              </div>
+            </div>
+
+            <div class="result-summary" id="result-summary">
+              <div class="empty-state">
+                <div class="empty-icon" aria-hidden="true"></div>
+                <h3>Ready when you are</h3>
+                <p>Set filters in the sidebar, then <strong>Run scan</strong>. Widen keywords/states if you expect multiple rows.</p>
+              </div>
+            </div>
+
+            <div class="result-detail" id="result-detail"></div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

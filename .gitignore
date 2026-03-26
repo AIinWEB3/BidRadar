@@ -3,6 +3,8 @@ plan/
 reference/
 sponsor-apis/
 reports/
+node_modules/
+*.log
 
 __pycache__/
 *.pyc

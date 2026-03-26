@@ -1,0 +1,9 @@
+{
+  "name": "bidradar-demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node demo/server.js",
+    "dev": "node --watch demo/server.js"
+  }
+}

@@ -1,0 +1,114 @@
+[
+  {
+    "opportunityId": "opp-demo-001",
+    "solicitationNumber": "CA-WORK-2026-101",
+    "title": "Workforce Reporting and Dashboard Modernization",
+    "description": "Seeking a contractor to modernize labor program reporting workflows, improve data quality, and build executive dashboards on AWS for a California workforce agency.",
+    "type": "Solicitation",
+    "postedDate": "2026-03-14T00:00:00Z",
+    "responseDeadline": "2026-04-09T15:00:00-07:00",
+    "estimatedValue": 320000,
+    "naicsCode": "541511",
+    "setAsideType": "SBA",
+    "agencyName": "California Workforce Services",
+    "officeName": "Technology and Reporting Office",
+    "placeOfPerformance": {
+      "city": "Sacramento",
+      "state": "California",
+      "stateCode": "CA"
+    },
+    "contacts": [
+      {
+        "name": "Alex Turner",
+        "email": "alex.turner@agency.ca.gov",
+        "phone": "555-010-1001"
+      }
+    ],
+    "samGovLink": "https://sam.gov/opp/opp-demo-001/view",
+    "attachments": [
+      {
+        "filename": "Statement_of_Work.pdf",
+        "mimeType": "application/pdf",
+        "size": 245632,
+        "resourceId": "res-demo-001",
+        "accessLevel": "public",
+        "postedDate": "2026-03-14T00:00:00Z",
+        "downloadUrl": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/res-demo-001/download"
+      }
+    ]
+  },
+  {
+    "opportunityId": "opp-demo-002",
+    "solicitationNumber": "FED-OPS-2026-022",
+    "title": "Onsite Hardware Refresh and Classified Network Support",
+    "description": "Seeking a contractor to perform onsite hardware replacement, secure network installation, and ongoing classified environment support for a federal defense site.",
+    "type": "Solicitation",
+    "postedDate": "2026-03-12T00:00:00Z",
+    "responseDeadline": "2026-03-31T12:00:00-04:00",
+    "naicsCode": "334111",
+    "setAsideType": "Full and Open",
+    "agencyName": "Department of Defense",
+    "officeName": "Infrastructure Operations Office",
+    "placeOfPerformance": {
+      "city": "Arlington",
+      "state": "Virginia",
+      "stateCode": "VA"
+    },
+    "contacts": [
+      {
+        "name": "Jamie Brooks",
+        "email": "jamie.brooks@dod.gov",
+        "phone": "555-010-1002"
+      }
+    ],
+    "samGovLink": "https://sam.gov/opp/opp-demo-002/view",
+    "attachments": [
+      {
+        "filename": "Technical_Requirements.pdf",
+        "mimeType": "application/pdf",
+        "size": 452900,
+        "resourceId": "res-demo-002",
+        "accessLevel": "public",
+        "postedDate": "2026-03-12T00:00:00Z",
+        "downloadUrl": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/res-demo-002/download"
+      }
+    ]
+  },
+  {
+    "opportunityId": "opp-demo-003",
+    "solicitationNumber": "CITY-DATA-2026-014",
+    "title": "Human Services Analytics and Workflow Automation Support",
+    "description": "City agency seeks a vendor to improve reporting, automate recurring human services workflows, and deliver accessible executive dashboards with measurable outcomes.",
+    "type": "Solicitation",
+    "postedDate": "2026-03-16T00:00:00Z",
+    "responseDeadline": "2026-04-18T17:00:00-04:00",
+    "naicsCode": "541511",
+    "setAsideType": "WOSB",
+    "agencyName": "City Department of Human Services",
+    "officeName": "Program Analytics Office",
+    "placeOfPerformance": {
+      "city": "New York",
+      "state": "New York",
+      "stateCode": "NY"
+    },
+    "contacts": [
+      {
+        "name": "Taylor Chen",
+        "email": "taylor.chen@city.gov",
+        "phone": "555-010-1003"
+      }
+    ],
+    "samGovLink": "https://sam.gov/opp/opp-demo-003/view",
+    "attachments": [
+      {
+        "filename": "RFP_Attachment.pdf",
+        "mimeType": "application/pdf",
+        "size": 180442,
+        "resourceId": "res-demo-003",
+        "accessLevel": "public",
+        "postedDate": "2026-03-16T00:00:00Z",
+        "downloadUrl": "https://sam.gov/api/prod/opps/v3/opportunities/resources/files/res-demo-003/download"
+      }
+    ]
+  }
+]

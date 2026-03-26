@@ -1,49 +1,55 @@
 # Demo Company Profile
 
-Name: Civic Signal Labs
-Preferred Contract Size: $100,000 - $1,500,000
-Delivery Model: Remote-first with limited travel
+Name: iSoftStone Information Technology (Group) Co., Ltd.
+Preferred Contract Size: $250,000 - $5,000,000
+Delivery Model: Hybrid delivery with remote execution and project-based onsite support when required
 
 ## Services
 
-- public-sector data modernization
-- AWS-based data pipelines
-- executive dashboards
-- data engineering
-- labor and workforce analytics
-- analytics dashboards
-- cloud migration
+- digital transformation consulting
+- cloud consulting and integration
+- cloud-native development
+- data intelligence and data governance
+- AI and large-model related services
+- software engineering
+- digital operations and managed services
 - workflow automation
-- AI-assisted reporting
-- program performance measurement
+- enterprise platform modernization
+- cloud management and cloud security
 
 ## Past Performance
 
-- Modernized a state workforce agency reporting pipeline on AWS with automated dashboards and data quality checks.
-- Built a public-sector grants analytics portal that consolidated reporting across multiple programs.
-- Delivered a labor-market insights dashboard for a city economic development office with secure role-based reporting.
+- Public materials describe broad cloud, data, AI, and industry solution delivery across more than 10 industries and more than 100 solutions with ecosystem partners.
+- Public project materials describe transportation-adjacent IT delivery and technical support for Hangzhou Public Transport Group.
+- Public project materials describe education-sector IT implementation and technical support for Chengdu University of Information Technology.
 
 ## Certifications
 
-- AWS Advanced Tier Services Partner
-- SOC 2 Type II
-- accessibility-first delivery practice
+- CMMI v2.0 Maturity Level 5
+- DevOps capability maturity model level 3
+- ITSS operations and maintenance capability maturity level 1
+- large partner ecosystem with major cloud and technology vendors
 
 ## Preferred Sectors
 
-- workforce
-- labor and workforce
-- human services
-- economic development
-- state and local government
+- enterprise IT modernization
+- transportation
+- education
+- communications and internet
+- finance
+- manufacturing
+- energy and power
+- government-adjacent digital services
 
 ## No-Go Criteria
 
-- onsite-only delivery
-- active Top Secret clearance required
-- contract value below $75,000
+- active Top Secret or other clearance-heavy delivery requirements
+- opportunities that require strong documented U.S. federal prime past performance
+- hardware-only procurement with minimal software or consulting scope
+- defense construction, munitions, or highly specialized physical infrastructure projects
 
 ## Notes
 
-- Strongest positioning: public-sector data modernization, analytics, reporting, and workflow automation.
-- Weakest positioning: hardware-heavy procurement, defense-only work, or projects requiring classified delivery environments.
+- Strongest positioning: digital transformation, cloud modernization, data platforms, AI-enabled enterprise services, and large-scale delivery maturity.
+- Weakest positioning: U.S. federal compliance-heavy procurements, classified delivery environments, and opportunities where public evidence of exact prior work is thin.
+- This profile is a synthesized fallback for demo use and is intended to stay broadly aligned with the iSoftStone documents uploaded to Contextual.
